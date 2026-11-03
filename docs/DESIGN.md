@@ -105,9 +105,35 @@ The `Sim` project must never reference `App`. That single rule keeps the engine 
 
 - Planar graph-paper space, e.g. **200×200 units**, continuous positions (not tile-locked).
 - Organism spawns near the centre.
-- **One source per need, placed far away** and in different directions, e.g. 60–90 units out.
+- **One source per need, only reasonably far away** and in different directions, e.g. 25–45 units out. Distance alone isn't the challenge; **effort** is.
 - **Decoy objects** scattered around (rocks, inedible plants, maybe one mildly harmful). This is what makes "no instructions" real — see below.
 - Sources deplete when used and slowly regenerate. No relocation yet.
+
+#### Terrain: effort instead of distance
+
+Each source sits behind something that costs effort to cross, so the organism faces **short-but-hard vs. long-but-easy** trade-offs:
+
+| Terrain | Effect | Typical placement |
+|---|---|---|
+| **Hill** (height field) | Climbing drains extra energy and rest, scaled by slope; downhill is cheap. Movement slows on steep slopes. | Food on a hilltop, or water in a valley behind a ridge |
+| **Marsh** | Slow movement; drains warmth (wet and cold). | Around the water source |
+| **Thicket** | Blocks sight — objects inside are invisible until very close. | Hides the shelter |
+| **Exposed ridge** | Fast to cross, but drains warmth quickly. | Between spawn and the heat source |
+
+Every source should have at least two routes: a direct one through costly terrain and a longer detour around it.
+
+The world sets the per-step cost (the slope comes from the height field; terrain type adds modifiers). The organism **doesn't know the costs in advance**. It feels them as its needs drain while it moves.
+
+**What it can learn:**
+- **Effort memory.** A coarse grid (e.g. 5×5-unit cells) remembering "crossing here cost me X", with confidence. Planning uses it as a travel-cost map.
+- **Routes emerge.** Early on it goes straight over the hill. After a few costly trips, its remembered costs can make the detour score better — it "discovers" a path without any pathfinding being scripted.
+- **Context matters.** When thirst is critical, the short hard route can still win. The same organism takes different routes depending on its state.
+
+Pathing: simple A* over the coarse grid using *remembered* costs (unknown cells get a neutral guess). Cheap, inspectable, and the planned route can be drawn on the map.
+
+**Visuals:** hills as thin contour lines over the graph paper (topographic-map style), marsh as fine stipple, thicket as light hatching, ridge as a dashed outline. Optional overlay: the organism's effort memory as a faint heat tint.
+
+For MVP-0 the minimum is **the height field (hills) plus one other terrain type** (marsh). Thicket and ridge can come right after.
 
 ### The four needs
 
@@ -203,9 +229,10 @@ Reproduction, genetics, teaching, multiple organisms, heatmaps, statistics chart
 
 ### Acceptance criteria
 
-1. One organism spawns knowing nothing; sources are far away and unmarked to it.
+1. One organism spawns knowing nothing; sources are moderately far, behind costly terrain, and unmarked to it.
 2. It explores, tries objects, and logs what happened.
 3. It can learn that a kind of object satisfies a need, and remember where it was.
+3b. It remembers how costly terrain was and, over repeated trips, can switch to a cheaper route.
 4. It can die from any of the four needs, and the log makes the cause obvious.
 5. On a good seed, it settles into revisiting known sources.
 6. The inspector always shows current intent and why.
