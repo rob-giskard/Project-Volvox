@@ -1,0 +1,79 @@
+// Volvox tuning file. Read by the game (next to Volvox.exe) and by the test runner.
+// One tick = one second of simulated time. Needs run 0..100.
+// Delete any line to fall back to the built-in default. List all with: VolvoxRunner --params
+{
+  // World
+  "WorldSize": 200,
+  "SourceMinDistance": 25,
+  "SourceMaxDistance": 45,
+  "DecoyCount": 40,
+  "NightshadeShare": 0.1,
+  "ExtraHills": 7,
+
+  // Obstacles in front of each source
+  "FoodHillHeight": 14,
+  "WaterHillHeight": 10,
+  "HeatHillHeight": 8,
+  "MarshRadius": 8,
+  "ThicketRadius": 7,
+
+  // Starting state
+  "StartEnergy": 75,
+  "StartHydration": 75,
+  "StartWarmth": 85,
+  "StartRest": 85,
+
+  // Body, per tick
+  "EnergyDrain": 0.006,
+  "HydrationDrain": 0.013,
+  "RestDrain": 0.005,
+  "SleepRestRegen": 0.06,
+  "DigestRate": 0.05,
+  "DigestEfficiency": 0.9,
+  "StomachCapacity": 60,
+  "DeprivationDamage": 0.05,
+  "HealthRegen": 0.01,
+  "MaxAge": 0,
+
+  // Temperature
+  "AmbientBase": 10,
+  "ComfortTemperature": 18,
+  "WarmthResponse": 0.002,
+  "HeightCooling": 0.25,
+  "VentWarmth": 28,
+  "VentRadius": 11,
+
+  // Movement and terrain effort
+  "Speed": 0.5,
+  "MoveEnergyCost": 0.004,
+  "ClimbEnergyCost": 0.06,
+  "ClimbRestCost": 0.04,
+  "SlopeSlowdown": 1.5,
+  "MarshSpeed": 0.45,
+  "MarshWarmthDrain": 0.03,
+  "ThicketSpeed": 0.7,
+
+  // Senses and mind
+  "SenseRadius": 9,
+  "ThicketSenseRadius": 3,
+  "DecisionInterval": 10,
+  "ActionDuration": 20,
+  "Curiosity": 0.6,
+  "MemoryCapacity": 40,
+  "LocationConfidenceDecay": 0.00002,
+  "EffortCellSize": 5,
+  "EffortLearningRate": 0.3,
+  "EmptySourceRecheck": 1200,
+  "GiveUpTicks": 2500,
+  "ExploreMinDistance": 8,
+  "ExploreMaxDistance": 30,
+  "HomeRange": 40,
+
+  // Innate gradient senses: felt locally, they bias wandering when a need is urgent.
+  // The organism still has to learn which object actually helps.
+  "HumidityRadius": 14,
+  "ScentRadius": 12,
+  "Thermotaxis": 3,
+  "Hydrotaxis": 4,
+  "Olfaction": 2
+}

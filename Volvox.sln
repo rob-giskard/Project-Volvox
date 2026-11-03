@@ -1,0 +1,34 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volvox.Sim", "src\Volvox.Sim\Volvox.Sim.csproj", "{D9813EC1-B23E-599C-A2CC-5757B74F3C31}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volvox.App", "src\Volvox.App\Volvox.App.csproj", "{BF06EBE8-5589-5731-BEBF-30E57466B473}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volvox.Runner", "src\Volvox.Runner\Volvox.Runner.csproj", "{DD3B8551-A256-5A30-B201-74707521DF94}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9813EC1-B23E-599C-A2CC-5757B74F3C31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9813EC1-B23E-599C-A2CC-5757B74F3C31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9813EC1-B23E-599C-A2CC-5757B74F3C31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9813EC1-B23E-599C-A2CC-5757B74F3C31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF06EBE8-5589-5731-BEBF-30E57466B473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF06EBE8-5589-5731-BEBF-30E57466B473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF06EBE8-5589-5731-BEBF-30E57466B473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF06EBE8-5589-5731-BEBF-30E57466B473}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD3B8551-A256-5A30-B201-74707521DF94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD3B8551-A256-5A30-B201-74707521DF94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD3B8551-A256-5A30-B201-74707521DF94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD3B8551-A256-5A30-B201-74707521DF94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

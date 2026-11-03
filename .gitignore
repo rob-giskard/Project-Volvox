@@ -1,0 +1,19 @@
+# Build output
+bin/
+obj/
+dist/
+publish/
+*.exe
+*.dll
+*.pdb
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Test runner output
+*.csv
+*.log

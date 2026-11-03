@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Volvox.Sim</RootNamespace>
+    <AssemblyName>Volvox.Sim</AssemblyName>
+  </PropertyGroup>
+
+</Project>

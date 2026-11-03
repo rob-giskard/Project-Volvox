@@ -160,6 +160,12 @@ To make this more than a pathfinding demo, the organism starts knowing **nothing
 
 So the first discovery isn't "found water" — it's "tried drinking from this thing, hydration went up". Rocks teach it nothing; the harmful plant teaches it to avoid that kind. That's real learning with tiny rules.
 
+### Innate senses (added during tuning)
+
+Balance tests showed that blind wandering almost never found all four sources in time. Real organisms aren't blind, so the organism now **feels three local gradients** where it stands: warmer air (near the vent, and in valleys), damper air (around the pool), and a sweet smell (around the berry bush).
+
+When a matching need is urgent, exploration drifts up the gradient (thermotaxis, hydrotaxis, smell). It still has to **find the object and learn by trying** that drinking from the pool, not eating it, is what helps. Exploration also prefers to stay within a **home range** of its birthplace instead of wandering off to the far corners. All of these strengths are parameters (`Thermotaxis`, `Hydrotaxis`, `Olfaction`, `HomeRange`); setting them to 0 restores pure blind search.
+
 ### Decision-making (simple, inspectable)
 
 Every N ticks the mind scores a few candidate actions:
@@ -180,6 +186,7 @@ Highest score wins. Write the top 2–3 scores to the inspector so the player ca
 ### Event log
 
 - Scrollable list with a **search box** (plain substring, case-insensitive) and **category toggles** (BIO / BEH / COG / ENV).
+- **Sortable** by time, lifetime (organism age at the event), event type, interaction (the object involved) or category, ascending or descending. Clicking a column header sorts by it.
 - Virtualised list so it handles thousands of lines.
 - Structured events underneath: `{id, tick, category, organismId, x, y, text, data}`.
 - Don't log every step. Log: decisions that *change* intent, discoveries, tries, learning, need thresholds crossed (e.g. "hydration critical"), death.
@@ -215,7 +222,7 @@ T+002241  COG  Remembered pool at (168,121)
 │                                      │ why: 0.71 / 0.34 ... │
 │                                      │ KNOWLEDGE (5)        │
 ├──────────────────────────────────────┴──────────────────────┤
-│ [search______] [BIO][BEH][COG][ENV]   ▌▌ 1× 5× 20× 100×     │
+│ [search______] [BIO][BEH][COG][ENV]  sort [time v] ASC  FOLLOW │
 │ T+002240  BEH  Tried DRINK on object #2 → hydration +18     │
 │ T+002241  COG  Association: pool → hydration (conf 0.35)    │
 └─────────────────────────────────────────────────────────────┘
@@ -238,6 +245,14 @@ Reproduction, genetics, teaching, multiple organisms, heatmaps, statistics chart
 6. The inspector always shows current intent and why.
 7. The log is scrollable and searchable; clicking an entry locates it on the map.
 8. A headless runner reports, over N seeds: survival time, time to first discovery, cause of death.
+
+### Speed modes
+
+Pause plus three speeds: **1×** (30 sim-seconds per real second), **10×** and **100×**. Keys: space pauses, 1/2/3 pick a speed. The headless test runner is the fourth, "as fast as the CPU allows" mode.
+
+### Balance at the current defaults
+
+Measured on a Python mirror of the engine over 60 seeds, 12 sim hours each: every organism finds at least one remedy; about **57% survive** the full 12 hours. Deaths split between dehydration, starvation and hypothermia. Run `run-tests.bat` to re-measure after changing parameters.
 
 ## Roadmap after MVP-0
 
